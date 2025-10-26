@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RestaurantCard from "../components/RestaurantCard";
-
-const API = "https://food-notes-backend.onrender.com/api/restaurants";
+import { API_URL } from "../api"; // import URL backend
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    axios.get(API).then((res) => setRestaurants(res.data));
+    axios
+      .get(`${API_URL}/api/restaurants`)
+      .then((res) => setRestaurants(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
