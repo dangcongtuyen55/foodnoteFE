@@ -25,7 +25,7 @@ export default function AddRestaurant() {
     for (const key in form) formData.append(key, form[key]);
     if (menuImage) formData.append("menuImage", menuImage);
 
-    await axios.post(`${API_URL}/restaurants`, formData, {
+    await axios.post(`${API_URL}/api/restaurants`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
     navigate("/");
