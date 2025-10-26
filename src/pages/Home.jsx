@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RestaurantCard from "../components/RestaurantCard";
 
-const API = "http://localhost:5000/api/restaurants";
+const API = "https://food-notes-backend.onrender.com/api/restaurants";
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Danh sách quán ăn 🍴</h1>
+      <h1 className="mb-4 text-2xl font-bold">Danh sách quán ăn 🍴</h1>
       <div className="grid gap-4">
         {restaurants.map((r) => (
           <RestaurantCard key={r._id} data={r} />
