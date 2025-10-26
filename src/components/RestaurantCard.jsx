@@ -1,25 +1,32 @@
+import { API_URL } from "../api"; // API_URL = process.env.REACT_APP_API_URL
+
 export default function RestaurantCard({ data }) {
   const openMap = () => window.open(data.mapUrl, "_blank");
 
+  // Kiểm tra xem menuImage là URL đầy đủ hay file local
+  const menuImageUrl = data.menuImage?.startsWith("http")
+    ? data.menuImage
+    : `${API_URL}${data.menuImage ? "/uploads/" + data.menuImage : ""}`;
+
   return (
-    <div className="border p-3 rounded-xl shadow-sm flex gap-3 bg-white">
+    <div className="flex gap-3 p-3 bg-white border shadow-sm rounded-xl">
       {data.menuImage && (
         <img
-          src={`http://localhost:5000${data.menuImage}`}
+          src={menuImageUrl}
           alt="menu"
-          className="w-20 h-20 object-cover rounded-lg"
+          className="object-cover w-20 h-20 rounded-lg"
         />
       )}
       <div className="flex-1">
-        <h2 className="font-semibold text-lg">{data.name}</h2>
+        <h2 className="text-lg font-semibold">{data.name}</h2>
         <p
           onClick={openMap}
-          className="text-blue-600 underline text-sm cursor-pointer"
+          className="text-sm text-blue-600 underline cursor-pointer"
         >
           {data.address}
         </p>
-        <p className="text-sm mt-1">Đánh giá: {data.rating}</p>
-        {data.note && <p className="text-gray-500 text-sm mt-1">{data.note}</p>}
+        <p className="mt-1 text-sm">Đánh giá: {data.rating}</p>
+        {data.note && <p className="mt-1 text-sm text-gray-500">{data.note}</p>}
       </div>
     </div>
   );
